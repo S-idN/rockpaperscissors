@@ -1,7 +1,19 @@
-console.log("This is the one");
+
 var humanScore = 0;
 var computerScore = 0;
-
+var ogh=0;
+var ogc=0;
+let i = 0;
+let choice = 0;
+const rockbutton = document.querySelector("#rock");
+const paperbutton = document.querySelector("#paper");
+const scissorsbutton = document.querySelector("#scissors");
+console.log("This is the one");
+console.log(rockbutton);
+const res=document.querySelector("#Result");
+const hums=document.querySelector("#Human-Score");
+const comps=document.querySelector("#Computer-Score");
+const win=document.querySelector("#winner");
 function getComputerChoice()
 {
     let choice = Math.random();
@@ -27,14 +39,38 @@ function getComputerChoice()
 
 function getHumanChoice()
 {
-    let humanchoice = (prompt("Enter 1.) Rock 2.)Paper 3.)Scissors"));
-    humanchoice = humanchoice.toUpperCase();
-    console.log("You picked "+humanchoice+"!");
-    return humanchoice;
+    choice =rockbutton.addEventListener("click",playRoundRock);
+    choice = paperbutton.addEventListener("click",playRoundPaper);
+    choice = scissorsbutton.addEventListener("click",playRoundScissors);
+    //playGame();
+    return choice;
+}
+
+function playRoundRock()
+{
+    i = i + 1;
+    let cc= getComputerChoice();
+    playRound("ROCK",cc);
+}
+
+function playRoundPaper()
+{
+    i = i + 1;
+    let cc= getComputerChoice();
+    playRound("PAPER",cc);
+}
+
+function playRoundScissors()
+{
+    i = i + 1;
+    let cc= getComputerChoice();
+    playRound("SCISSORS",cc);
 }
 
 function playRound(hc, cc)
 {
+    ogc=computerScore
+    ogh=humanScore;
     if(hc == "ROCK")
     {
         if(cc == 1)
@@ -90,33 +126,70 @@ function playRound(hc, cc)
     {
         console.log("That one doesn't count >:(");
     }
-}
-
-function playGame()
-{
-    let i = 1;
-    while(i<=5)
+    if(humanScore==computerScore)
     {
-        let hc=getHumanChoice();
-        let cc=getComputerChoice();
-        playRound(hc,cc);
-        console.log("Round-"+i);
-        console.log("HumanScore- "+humanScore+"  ComputerScore- "+computerScore+"!");
-        i = i+1;
+        console.log("You are as smart as a computer :O");
+    }
+    else if(humanScore>computerScore)
+    {
+        console.log("YOU WIN!!!!");
+    }
+    else
+    {
+        console.log("you lose :(");
+    }
+    console.log("Round-"+i);
+    console.log("HumanScore- "+humanScore+"  ComputerScore- "+computerScore+"!");
+    var flag=resultprint(humanScore,computerScore,ogh,ogc);
+    if(flag==1)
+    {
+        humanScore=0;
+        computerScore=0
     }
 }
 
-playGame();
 
-if(humanScore==computerScore)
+function resultprint(hs,cs,ogh,ogc)
 {
-    console.log("You are as smart as a computer :O");
+    hums.textContent="Human:"+hs;
+    comps.textContent="Computer:"+cs;
+    if(hs==ogh&&cs==ogc)
+    {
+        win.textContent="Drawn round";
+    }
+    else
+    {
+        if(hs>ogh)
+        {
+            win.textContent="Round won by Humans!"
+        }
+        else
+        {
+            win.textContent="Round won by Computers!"
+        }
+    }
+    if(hs!=5&&cs!=5)
+    {
+        return 0;
+    }
+    if(hs==5)
+    {
+        win.textContent="   Humans win! (The world is saved :O)"
+        hums.textContent="  Human:"+hs+" WINNER!";
+        comps.textContent=" Computer:"+cs+" WOMP WOMP";
+        hs=0;
+        cs=0;
+        return 1;
+    }
+    else if(cs==5)
+    {
+        win.textContent="   Computers win! (The robots have taken over D:)"
+        hums.textContent="  Human:"+hs+" WOMP WOMP!";
+        comps.textContent=" Computer:"+cs+" WINNER!";
+        hs=0;
+        cs=0
+        return 1;
+    }
 }
-else if(humanScore>computerScore)
-{
-    console.log("YOU WIN!!!!");
-}
-else
-{
-    console.log("you lose :(");
-}
+
+let hc = getHumanChoice();

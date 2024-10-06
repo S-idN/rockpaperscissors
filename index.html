@@ -3,10 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src = "jscript.js"></script>
+  <script src = "jscript.js" defer></script>
+  <link rel="stylesheet" href="rps.css"></style>
   <title>Document</title>
 </head>
 <body>
-    Rock paper scissors program
+  <div id="title">
+    Rock paper scissors program<br>
+  </div>
+    <div id="button-group">
+      <button id="rock">ROCK</button>
+      <button id="paper">PAPER</button>
+      <button id="scissors">SCISSORS</button>
+    </div>
+    <div class="Results">
+      <p id="Human-Score">Human: 0</p>
+      <p id="Computer-Score">Computer: 0</p>
+      <p id="winner"></p>
+    </div>
 </body>
 </html>
